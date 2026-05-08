@@ -1,5 +1,5 @@
-name: myapp
-description: "A new Flutter project."
+name: calcio
+description: "Calcio — A premium calculator and unit converter app with glassmorphic design."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   math_expressions: ^2.6.0
   google_fonts: ^6.2.1
+  shared_preferences: ^2.3.0
+  share_plus: ^10.0.0
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +49,14 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#050510"
+  adaptive_icon_foreground: "assets/icon/app_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
