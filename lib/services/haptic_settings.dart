@@ -13,7 +13,8 @@ class HapticSettings extends InheritedWidget {
   });
 
   static bool of(BuildContext context) {
-    final settings = context.dependOnInheritedWidgetOfExactType<HapticSettings>();
+    final settings = context
+        .dependOnInheritedWidgetOfExactType<HapticSettings>();
     return settings?.enabled ?? true;
   }
 
@@ -33,5 +34,6 @@ class HapticSettings extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(HapticSettings oldWidget) => enabled != oldWidget.enabled;
+  bool updateShouldNotify(HapticSettings oldWidget) =>
+      enabled != oldWidget.enabled;
 }

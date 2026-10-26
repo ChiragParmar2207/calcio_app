@@ -14,7 +14,11 @@ class CalculatorScreen extends StatefulWidget {
   final StorageService storage;
   final VoidCallback? onSettingsChanged;
 
-  const CalculatorScreen({super.key, required this.storage, this.onSettingsChanged});
+  const CalculatorScreen({
+    super.key,
+    required this.storage,
+    this.onSettingsChanged,
+  });
 
   @override
   State<CalculatorScreen> createState() => _CalculatorScreenState();
@@ -124,10 +128,11 @@ class _CalculatorScreenState extends State<CalculatorScreen>
               _ctrl.toggleScientificMode();
               HapticSettings.light(context);
             },
-            onSettingsTap: () => SettingsSheet.show(context, widget.storage, () {
-              setState(() {});
-              widget.onSettingsChanged?.call();
-            }),
+            onSettingsTap: () =>
+                SettingsSheet.show(context, widget.storage, () {
+                  setState(() {});
+                  widget.onSettingsChanged?.call();
+                }),
             onSwipeLeft: () {
               _ctrl.onClearPressed();
               HapticSettings.light(context);
@@ -171,7 +176,10 @@ class _CalculatorScreenState extends State<CalculatorScreen>
           secondCurve: Curves.easeInCubic,
         ),
         // Button grid
-        Expanded(flex: _ctrl.isScientificMode ? 4 : 5, child: _buildButtonGrid()),
+        Expanded(
+          flex: _ctrl.isScientificMode ? 4 : 5,
+          child: _buildButtonGrid(),
+        ),
         const SizedBox(height: 6),
       ],
     );

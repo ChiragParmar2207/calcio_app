@@ -25,7 +25,16 @@ class _ConverterScreenState extends State<ConverterScreen> {
     _Category(
       name: 'Length',
       icon: Icons.straighten_rounded,
-      units: ['Meter', 'Kilometer', 'Centimeter', 'Millimeter', 'Mile', 'Yard', 'Foot', 'Inch'],
+      units: [
+        'Meter',
+        'Kilometer',
+        'Centimeter',
+        'Millimeter',
+        'Mile',
+        'Yard',
+        'Foot',
+        'Inch',
+      ],
       toBase: [1, 1000, 0.01, 0.001, 1609.344, 0.9144, 0.3048, 0.0254],
     ),
     _Category(
@@ -108,16 +117,24 @@ class _ConverterScreenState extends State<ConverterScreen> {
     // 0=Celsius, 1=Fahrenheit, 2=Kelvin
     double celsius;
     switch (from) {
-      case 0: celsius = value;
-      case 1: celsius = (value - 32) * 5 / 9;
-      case 2: celsius = value - 273.15;
-      default: celsius = value;
+      case 0:
+        celsius = value;
+      case 1:
+        celsius = (value - 32) * 5 / 9;
+      case 2:
+        celsius = value - 273.15;
+      default:
+        celsius = value;
     }
     switch (to) {
-      case 0: return celsius;
-      case 1: return celsius * 9 / 5 + 32;
-      case 2: return celsius + 273.15;
-      default: return celsius;
+      case 0:
+        return celsius;
+      case 1:
+        return celsius * 9 / 5 + 32;
+      case 2:
+        return celsius + 273.15;
+      default:
+        return celsius;
     }
   }
 
@@ -181,53 +198,50 @@ class _ConverterScreenState extends State<ConverterScreen> {
     return SafeArea(
       bottom: false,
       child: Column(
-      children: [
-        const SizedBox(height: 8),
-        // Category tabs
-        _buildCategoryTabs(),
-        const SizedBox(height: 16),
-        // Conversion display
-        Expanded(
-          flex: 3,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                // From unit
-                _buildUnitCard(
-                  value: _inputValue,
-                  unitIndex: _fromUnit,
-                  units: cat.units,
-                  isInput: true,
-                  onUnitChanged: (i) => setState(() {
-                    _fromUnit = i;
-                    _convert();
-                  }),
-                ),
-                // Swap button
-                _buildSwapButton(),
-                // To unit
-                _buildUnitCard(
-                  value: _outputValue,
-                  unitIndex: _toUnit,
-                  units: cat.units,
-                  isInput: false,
-                  onUnitChanged: (i) => setState(() {
-                    _toUnit = i;
-                    _convert();
-                  }),
-                ),
-              ],
+        children: [
+          const SizedBox(height: 8),
+          // Category tabs
+          _buildCategoryTabs(),
+          const SizedBox(height: 16),
+          // Conversion display
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  // From unit
+                  _buildUnitCard(
+                    value: _inputValue,
+                    unitIndex: _fromUnit,
+                    units: cat.units,
+                    isInput: true,
+                    onUnitChanged: (i) => setState(() {
+                      _fromUnit = i;
+                      _convert();
+                    }),
+                  ),
+                  // Swap button
+                  _buildSwapButton(),
+                  // To unit
+                  _buildUnitCard(
+                    value: _outputValue,
+                    unitIndex: _toUnit,
+                    units: cat.units,
+                    isInput: false,
+                    onUnitChanged: (i) => setState(() {
+                      _toUnit = i;
+                      _convert();
+                    }),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        // Number pad
-        Expanded(
-          flex: 4,
-          child: _buildNumberPad(),
-        ),
-        const SizedBox(height: 8),
-      ],
+          // Number pad
+          Expanded(flex: 4, child: _buildNumberPad()),
+          const SizedBox(height: 8),
+        ],
       ),
     );
   }
@@ -259,7 +273,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 gradient: isSelected ? AppTheme.primaryGradient : null,
-                color: isSelected ? null : AppTheme.bgElevated.withValues(alpha: 0.6),
+                color: isSelected
+                    ? null
+                    : AppTheme.bgElevated.withValues(alpha: 0.6),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: isSelected
@@ -270,14 +286,19 @@ class _ConverterScreenState extends State<ConverterScreen> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(cat.icon, size: 16,
-                    color: isSelected ? Colors.white : AppTheme.textDim),
+                  Icon(
+                    cat.icon,
+                    size: 16,
+                    color: isSelected ? Colors.white : AppTheme.textDim,
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     cat.name,
                     style: AppTheme.historyStyle.copyWith(
                       fontSize: 13,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w400,
                       color: isSelected ? Colors.white : AppTheme.textDim,
                     ),
                   ),
@@ -319,7 +340,10 @@ class _ConverterScreenState extends State<ConverterScreen> {
             GestureDetector(
               onTap: () => _showUnitPicker(units, unitIndex, onUnitChanged),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppTheme.surface.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
@@ -331,14 +355,18 @@ class _ConverterScreenState extends State<ConverterScreen> {
                       units[unitIndex],
                       style: AppTheme.functionText.copyWith(
                         fontSize: 14,
-                        color: isInput ? AppTheme.accentStart : AppTheme.functionColor,
+                        color: isInput
+                            ? AppTheme.accentStart
+                            : AppTheme.functionColor,
                       ),
                     ),
                     const SizedBox(width: 4),
                     Icon(
                       Icons.keyboard_arrow_down_rounded,
                       size: 18,
-                      color: isInput ? AppTheme.accentStart : AppTheme.functionColor,
+                      color: isInput
+                          ? AppTheme.accentStart
+                          : AppTheme.functionColor,
                     ),
                   ],
                 ),
@@ -357,9 +385,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
                     color: isInput ? AppTheme.textPrimary : null,
                     foreground: !isInput
                         ? (Paint()
-                          ..shader = AppTheme.primaryGradient.createShader(
-                            const Rect.fromLTWH(0, 0, 300, 50),
-                          ))
+                            ..shader = AppTheme.primaryGradient.createShader(
+                              const Rect.fromLTWH(0, 0, 300, 50),
+                            ))
                         : null,
                   ),
                   maxLines: 1,
@@ -372,7 +400,11 @@ class _ConverterScreenState extends State<ConverterScreen> {
     );
   }
 
-  void _showUnitPicker(List<String> units, int current, ValueChanged<int> onChanged) {
+  void _showUnitPicker(
+    List<String> units,
+    int current,
+    ValueChanged<int> onChanged,
+  ) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -384,7 +416,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: AppTheme.bgCard.withValues(alpha: 0.9),
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(24),
+                ),
                 border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
               ),
               child: Column(
@@ -400,10 +434,13 @@ class _ConverterScreenState extends State<ConverterScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text('Select Unit', style: AppTheme.expressionStyle.copyWith(
-                    color: AppTheme.textPrimary,
-                    fontWeight: FontWeight.w600,
-                  )),
+                  Text(
+                    'Select Unit',
+                    style: AppTheme.expressionStyle.copyWith(
+                      color: AppTheme.textPrimary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   ...List.generate(units.length, (i) {
                     final isSelected = i == current;
@@ -411,13 +448,20 @@ class _ConverterScreenState extends State<ConverterScreen> {
                       title: Text(
                         units[i],
                         style: AppTheme.buttonTextSmall.copyWith(
-                          color: isSelected ? AppTheme.accentStart : AppTheme.textSecondary,
-                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                          color: isSelected
+                              ? AppTheme.accentStart
+                              : AppTheme.textSecondary,
+                          fontWeight: isSelected
+                              ? FontWeight.w600
+                              : FontWeight.w400,
                         ),
                       ),
                       trailing: isSelected
-                          ? const Icon(Icons.check_circle_rounded,
-                              color: AppTheme.accentStart, size: 22)
+                          ? const Icon(
+                              Icons.check_circle_rounded,
+                              color: AppTheme.accentStart,
+                              size: 22,
+                            )
                           : null,
                       onTap: () {
                         onChanged(i);
@@ -454,7 +498,11 @@ class _ConverterScreenState extends State<ConverterScreen> {
               ),
             ],
           ),
-          child: const Icon(Icons.swap_vert_rounded, color: Colors.white, size: 22),
+          child: const Icon(
+            Icons.swap_vert_rounded,
+            color: Colors.white,
+            size: 22,
+          ),
         ),
       ),
     );
@@ -502,21 +550,13 @@ class _ConverterScreenState extends State<ConverterScreen> {
           Expanded(
             child: Row(
               children: [
-                _ConvPadButton(
-                  label: '±',
-                  isSign: true,
-                  onTap: _toggleSign,
-                ),
+                _ConvPadButton(label: '±', isSign: true, onTap: _toggleSign),
                 _ConvPadButton(
                   label: '0',
                   flex: 2,
                   onTap: () => _handlePadTap('0'),
                 ),
-                _ConvPadButton(
-                  label: '⇄',
-                  isSwap: true,
-                  onTap: _swapUnits,
-                ),
+                _ConvPadButton(label: '⇄', isSwap: true, onTap: _swapUnits),
               ],
             ),
           ),
@@ -573,9 +613,10 @@ class _ConvPadButtonState extends State<_ConvPadButton>
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
-    _scale = Tween<double>(begin: 1.0, end: 0.90).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
-    );
+    _scale = Tween<double>(
+      begin: 1.0,
+      end: 0.90,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
   }
 
   @override
@@ -645,13 +686,19 @@ class _ConvPadButtonState extends State<_ConvPadButton>
   BoxDecoration _decoration() {
     if (widget.isSwap || widget.isSign) {
       return BoxDecoration(
-        gradient: widget.isSign ? AppTheme.coolGradient : AppTheme.primaryGradient,
+        gradient: widget.isSign
+            ? AppTheme.coolGradient
+            : AppTheme.primaryGradient,
         borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         boxShadow: _pressed
             ? []
             : [
                 BoxShadow(
-                  color: (widget.isSign ? AppTheme.operatorColor : AppTheme.accentStart).withValues(alpha: 0.3),
+                  color:
+                      (widget.isSign
+                              ? AppTheme.operatorColor
+                              : AppTheme.accentStart)
+                          .withValues(alpha: 0.3),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -682,29 +729,34 @@ class _ConvPadButtonState extends State<_ConvPadButton>
 
   Widget _content() {
     if (widget.label == '⌫') {
-      return Icon(Icons.backspace_outlined, size: 20,
-          color: AppTheme.deleteColor);
+      return Icon(
+        Icons.backspace_outlined,
+        size: 20,
+        color: AppTheme.deleteColor,
+      );
     }
     if (widget.label == '⇄') {
       return const Icon(Icons.swap_vert_rounded, size: 22, color: Colors.white);
     }
     if (widget.label == '±') {
-      return Text('±', style: AppTheme.buttonText.copyWith(
-        color: Colors.white,
-        fontWeight: FontWeight.w600,
-      ));
+      return Text(
+        '±',
+        style: AppTheme.buttonText.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
+        ),
+      );
     }
     return Text(
       widget.label,
       style: _isAction
           ? AppTheme.buttonTextSmall.copyWith(color: AppTheme.deleteColor)
           : (widget.isSwap || widget.isSign)
-              ? AppTheme.buttonText.copyWith(color: Colors.white)
-              : AppTheme.buttonText,
+          ? AppTheme.buttonText.copyWith(color: Colors.white)
+          : AppTheme.buttonText,
     );
   }
 }
-
 
 class _Category {
   final String name;

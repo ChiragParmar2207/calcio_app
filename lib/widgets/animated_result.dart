@@ -136,7 +136,9 @@ class _RollingDigitState extends State<_RollingDigit>
             children: [
               // Old digit sliding out upward
               Positioned(
-                top: widget.fontSize * 0.075 - (_animation.value * widget.fontSize * 1.2),
+                top:
+                    widget.fontSize * 0.075 -
+                    (_animation.value * widget.fontSize * 1.2),
                 child: Opacity(
                   opacity: (1.0 - _animation.value).clamp(0.0, 1.0),
                   child: Text(
@@ -151,7 +153,8 @@ class _RollingDigitState extends State<_RollingDigit>
               ),
               // New digit sliding in from below
               Positioned(
-                top: widget.fontSize * 0.075 +
+                top:
+                    widget.fontSize * 0.075 +
                     (widget.fontSize * 1.2 * (1.0 - _animation.value)),
                 child: Opacity(
                   opacity: _animation.value.clamp(0.0, 1.0),
@@ -178,11 +181,7 @@ class _StaticChar extends StatefulWidget {
   final String char;
   final double fontSize;
 
-  const _StaticChar({
-    super.key,
-    required this.char,
-    required this.fontSize,
-  });
+  const _StaticChar({super.key, required this.char, required this.fontSize});
 
   @override
   State<_StaticChar> createState() => _StaticCharState();
@@ -212,7 +211,9 @@ class _StaticCharState extends State<_StaticChar>
     return FadeTransition(
       opacity: CurvedAnimation(parent: _controller, curve: Curves.easeOut),
       child: SizedBox(
-        width: widget.char == '.' ? widget.fontSize * 0.3 : widget.fontSize * 0.55,
+        width: widget.char == '.'
+            ? widget.fontSize * 0.3
+            : widget.fontSize * 0.55,
         height: widget.fontSize * 1.15,
         child: Center(
           child: Text(

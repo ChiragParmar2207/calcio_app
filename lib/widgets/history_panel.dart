@@ -20,18 +20,14 @@ class HistoryPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: AppTheme.backgroundGradient,
-      ),
+      decoration: const BoxDecoration(gradient: AppTheme.backgroundGradient),
       child: SafeArea(
         child: Column(
           children: [
             _buildHeader(context),
             const SizedBox(height: 8),
             Expanded(
-              child: history.isEmpty
-                  ? _buildEmptyState()
-                  : _buildHistoryList(),
+              child: history.isEmpty ? _buildEmptyState() : _buildHistoryList(),
             ),
           ],
         ),
@@ -46,8 +42,11 @@ class HistoryPanel extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back_ios_rounded,
-                color: AppTheme.textSecondary, size: 22),
+            icon: const Icon(
+              Icons.arrow_back_ios_rounded,
+              color: AppTheme.textSecondary,
+              size: 22,
+            ),
             onPressed: onClose,
           ),
           ShaderMask(
@@ -91,15 +90,10 @@ class HistoryPanel extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             'No calculations yet',
-            style: AppTheme.expressionStyle.copyWith(
-              color: AppTheme.textDim,
-            ),
+            style: AppTheme.expressionStyle.copyWith(color: AppTheme.textDim),
           ),
           const SizedBox(height: 8),
-          Text(
-            'Your history will appear here',
-            style: AppTheme.historyStyle,
-          ),
+          Text('Your history will appear here', style: AppTheme.historyStyle),
         ],
       ),
     );

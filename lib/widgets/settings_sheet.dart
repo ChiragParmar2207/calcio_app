@@ -14,7 +14,11 @@ class SettingsSheet extends StatefulWidget {
     required this.onChanged,
   });
 
-  static void show(BuildContext context, StorageService storage, VoidCallback onChanged) {
+  static void show(
+    BuildContext context,
+    StorageService storage,
+    VoidCallback onChanged,
+  ) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -168,22 +172,29 @@ class _SettingsSheetState extends State<SettingsSheet> {
                     : AppTheme.surface.withValues(alpha: 0.4),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(icon, size: 20,
-                  color: value ? AppTheme.accentStart : AppTheme.textDim),
+              child: Icon(
+                icon,
+                size: 20,
+                color: value ? AppTheme.accentStart : AppTheme.textDim,
+              ),
             ),
             const SizedBox(width: 14),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: AppTheme.buttonTextSmall.copyWith(
-                    fontSize: 15,
-                  )),
+                  Text(
+                    title,
+                    style: AppTheme.buttonTextSmall.copyWith(fontSize: 15),
+                  ),
                   const SizedBox(height: 2),
-                  Text(subtitle, style: AppTheme.historyStyle.copyWith(
-                    fontSize: 12,
-                    color: AppTheme.textDim,
-                  )),
+                  Text(
+                    subtitle,
+                    style: AppTheme.historyStyle.copyWith(
+                      fontSize: 12,
+                      color: AppTheme.textDim,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -233,14 +244,18 @@ class _SettingsSheetState extends State<SettingsSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: AppTheme.buttonTextSmall.copyWith(
-                      fontSize: 15,
-                    )),
+                    Text(
+                      title,
+                      style: AppTheme.buttonTextSmall.copyWith(fontSize: 15),
+                    ),
                     const SizedBox(height: 2),
-                    Text(subtitle, style: AppTheme.historyStyle.copyWith(
-                      fontSize: 12,
-                      color: AppTheme.textDim,
-                    )),
+                    Text(
+                      subtitle,
+                      style: AppTheme.historyStyle.copyWith(
+                        fontSize: 12,
+                        color: AppTheme.textDim,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -267,13 +282,16 @@ class _SettingsSheetState extends State<SettingsSheet> {
           return FadeTransition(
             opacity: animation,
             child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 0.05),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeOutCubic,
-              )),
+              position:
+                  Tween<Offset>(
+                    begin: const Offset(0, 0.05),
+                    end: Offset.zero,
+                  ).animate(
+                    CurvedAnimation(
+                      parent: animation,
+                      curve: Curves.easeOutCubic,
+                    ),
+                  ),
               child: child,
             ),
           );
@@ -375,11 +393,7 @@ class _TermsAndConditionsPage extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xFF0A0A1F),
-                  AppTheme.bgDark,
-                  Color(0xFF08081A),
-                ],
+                colors: [Color(0xFF0A0A1F), AppTheme.bgDark, Color(0xFF08081A)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -469,8 +483,10 @@ class _TermsAndConditionsPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 // Last updated badge
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: AppTheme.accentStart.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
@@ -520,8 +536,7 @@ class _TermsAndConditionsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ShaderMask(
-            shaderCallback: (b) =>
-                AppTheme.primaryGradient.createShader(b),
+            shaderCallback: (b) => AppTheme.primaryGradient.createShader(b),
             child: Text(
               section.title,
               style: AppTheme.buttonTextSmall.copyWith(

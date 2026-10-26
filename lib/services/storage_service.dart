@@ -62,8 +62,10 @@ class StorageService {
   // ── Settings ──────────────────────────────────────────────────────────
 
   bool get hapticEnabled => _prefs.getBool(_keyHapticEnabled) ?? true;
-  Future<void> setHapticEnabled(bool value) => _prefs.setBool(_keyHapticEnabled, value);
+  Future<void> setHapticEnabled(bool value) =>
+      _prefs.setBool(_keyHapticEnabled, value);
 
   bool get scientificDefault => _prefs.getBool(_keyScientificDefault) ?? false;
-  Future<void> setScientificDefault(bool value) => _prefs.setBool(_keyScientificDefault, value);
+  Future<void> setScientificDefault(bool value) =>
+      _prefs.setBool(_keyScientificDefault, value);
 }

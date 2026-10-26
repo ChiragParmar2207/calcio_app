@@ -51,47 +51,45 @@ class _HomeScreenState extends State<HomeScreen> {
     return HapticSettings(
       enabled: widget.storage.hapticEnabled,
       child: AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light.copyWith(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: AppTheme.bgDark,
-        systemNavigationBarIconBrightness: Brightness.light,
-      ),
-      child: Scaffold(
-        backgroundColor: AppTheme.bgDark,
-        body: Stack(
-          children: [
-            // Animated aurora background
-            const AnimatedAuroraBackground(),
-            // Dark overlay to keep readability
-            Container(
-              color: AppTheme.bgDark.withValues(alpha: 0.82),
-            ),
-            // Page content
-            Column(
-              children: [
-                Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    onPageChanged: (index) {
-                      setState(() => _currentIndex = index);
-                    },
-                    children: [
-                      CalculatorScreen(
-                        storage: widget.storage,
-                        onSettingsChanged: () => setState(() {}),
-                      ),
-                      const ConverterScreen(),
-                    ],
-                  ),
-                ),
-                // Custom bottom nav
-                _buildBottomNav(),
-              ],
-            ),
-          ],
+        value: SystemUiOverlayStyle.light.copyWith(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarColor: AppTheme.bgDark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
-      ),
+        child: Scaffold(
+          backgroundColor: AppTheme.bgDark,
+          body: Stack(
+            children: [
+              // Animated aurora background
+              const AnimatedAuroraBackground(),
+              // Dark overlay to keep readability
+              Container(color: AppTheme.bgDark.withValues(alpha: 0.82)),
+              // Page content
+              Column(
+                children: [
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      onPageChanged: (index) {
+                        setState(() => _currentIndex = index);
+                      },
+                      children: [
+                        CalculatorScreen(
+                          storage: widget.storage,
+                          onSettingsChanged: () => setState(() {}),
+                        ),
+                        const ConverterScreen(),
+                      ],
+                    ),
+                  ),
+                  // Custom bottom nav
+                  _buildBottomNav(),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

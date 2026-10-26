@@ -38,7 +38,9 @@ class ParticleBurstPainter extends CustomPainter {
 
       final currentPos = Offset(
         p.position.dx + p.velocity.dx * progress * 2,
-        p.position.dy + p.velocity.dy * progress * 2 + (progress * progress * 80), // gravity
+        p.position.dy +
+            p.velocity.dy * progress * 2 +
+            (progress * progress * 80), // gravity
       );
 
       final currentRadius = p.radius * (1.0 - progress * 0.5);
@@ -103,10 +105,7 @@ class ParticleBurstState extends State<ParticleBurst>
       final speed = 40.0 + _random.nextDouble() * 100;
       return _Particle(
         position: Offset.zero,
-        velocity: Offset(
-          math.cos(angle) * speed,
-          math.sin(angle) * speed,
-        ),
+        velocity: Offset(math.cos(angle) * speed, math.sin(angle) * speed),
         radius: 2.0 + _random.nextDouble() * 4,
         color: _burstColors[_random.nextInt(_burstColors.length)],
         life: 0.6 + _random.nextDouble() * 0.4,

@@ -44,7 +44,9 @@ class CalcEngine {
       return CalcSuccess(NumberFormatter.format(result));
     } on FormatException catch (e) {
       final msg = e.message;
-      if (msg.contains('factorial')) return const CalcError('Invalid factorial');
+      if (msg.contains('factorial')) {
+        return const CalcError('Invalid factorial');
+      }
       if (msg.contains('Division by zero')) {
         return const CalcError("Can't divide by zero");
       }
@@ -120,20 +122,11 @@ class CalcEngine {
     });
 
     // x² and x³ — support both bare numbers and parenthesized groups
-    result = result.replaceAllMapped(
-      _squaredExpr,
-      (m) => '(${m[1]})^2',
-    );
-    result = result.replaceAllMapped(
-      _cubedExpr,
-      (m) => '(${m[1]})^3',
-    );
+    result = result.replaceAllMapped(_squaredExpr, (m) => '(${m[1]})^2');
+    result = result.replaceAllMapped(_cubedExpr, (m) => '(${m[1]})^3');
 
     // Implicit multiplication: 2(3+4) -> 2*(3+4)
-    result = result.replaceAllMapped(
-      _implicitMul,
-      (m) => '${m[1]}*(',
-    );
+    result = result.replaceAllMapped(_implicitMul, (m) => '${m[1]}*(');
 
     // Constants — word-boundary-aware to avoid corrupting function names
     result = result.replaceAll('π', '${math.pi}');

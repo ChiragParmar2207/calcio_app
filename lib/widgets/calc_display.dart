@@ -64,7 +64,10 @@ class CalcDisplay extends StatelessWidget {
             if (memory != null && memory!.isNotEmpty)
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppTheme.warningColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
@@ -108,7 +111,8 @@ class CalcDisplay extends StatelessWidget {
               child: AnimatedResultDisplay(
                 value: result.isEmpty ? '0' : result,
                 fontSize: 52,
-                useGradient: result.isNotEmpty && result != '0' && !isErrorResult,
+                useGradient:
+                    result.isNotEmpty && result != '0' && !isErrorResult,
                 isError: isErrorResult,
               ),
             ),
@@ -117,8 +121,11 @@ class CalcDisplay extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.swipe_rounded, size: 12,
-                    color: AppTheme.textDim.withValues(alpha: 0.4)),
+                Icon(
+                  Icons.swipe_rounded,
+                  size: 12,
+                  color: AppTheme.textDim.withValues(alpha: 0.4),
+                ),
                 const SizedBox(width: 4),
                 Text(
                   'Swipe to clear • Hold to copy',
@@ -153,13 +160,15 @@ class CalcDisplay extends StatelessWidget {
       bool matchedFunc = false;
       for (final fn in funcNames) {
         if (expression.substring(i).startsWith(fn)) {
-          spans.add(TextSpan(
-            text: fn,
-            style: AppTheme.expressionStyle.copyWith(
-              color: AppTheme.functionColor,
-              fontWeight: FontWeight.w600,
+          spans.add(
+            TextSpan(
+              text: fn,
+              style: AppTheme.expressionStyle.copyWith(
+                color: AppTheme.functionColor,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ));
+          );
           i += fn.length;
           matchedFunc = true;
           break;
@@ -169,40 +178,43 @@ class CalcDisplay extends StatelessWidget {
 
       // Operators
       if (operators.contains(char)) {
-        spans.add(TextSpan(
-          text: ' $char ',
-          style: AppTheme.expressionStyle.copyWith(
-            color: AppTheme.operatorColor,
-            fontWeight: FontWeight.w700,
+        spans.add(
+          TextSpan(
+            text: ' $char ',
+            style: AppTheme.expressionStyle.copyWith(
+              color: AppTheme.operatorColor,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ));
+        );
       }
       // Parentheses
       else if (char == '(' || char == ')') {
-        spans.add(TextSpan(
-          text: char,
-          style: AppTheme.expressionStyle.copyWith(
-            color: AppTheme.accentEnd,
-            fontWeight: FontWeight.w600,
+        spans.add(
+          TextSpan(
+            text: char,
+            style: AppTheme.expressionStyle.copyWith(
+              color: AppTheme.accentEnd,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ));
+        );
       }
       // Constants
       else if (char == 'π' || char == 'e') {
-        spans.add(TextSpan(
-          text: char,
-          style: AppTheme.expressionStyle.copyWith(
-            color: AppTheme.warningColor,
-            fontWeight: FontWeight.w600,
+        spans.add(
+          TextSpan(
+            text: char,
+            style: AppTheme.expressionStyle.copyWith(
+              color: AppTheme.warningColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ));
+        );
       }
       // Regular characters (numbers, dots)
       else {
-        spans.add(TextSpan(
-          text: char,
-          style: AppTheme.expressionStyle,
-        ));
+        spans.add(TextSpan(text: char, style: AppTheme.expressionStyle));
       }
       i++;
     }
@@ -225,7 +237,9 @@ class CalcDisplay extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
               gradient: isScientificMode ? AppTheme.primaryGradient : null,
-              color: isScientificMode ? null : Colors.white.withValues(alpha: 0.04),
+              color: isScientificMode
+                  ? null
+                  : Colors.white.withValues(alpha: 0.04),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: isScientificMode
@@ -330,9 +344,11 @@ class CalcDisplay extends StatelessWidget {
           children: [
             const SizedBox(height: 8),
             Container(
-              width: 36, height: 4,
+              width: 36,
+              height: 4,
               decoration: BoxDecoration(
-                color: AppTheme.textDim, borderRadius: BorderRadius.circular(2),
+                color: AppTheme.textDim,
+                borderRadius: BorderRadius.circular(2),
               ),
             ),
             const SizedBox(height: 16),
@@ -351,11 +367,17 @@ class CalcDisplay extends StatelessWidget {
                     Navigator.pop(ctx);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Copied!',
-                            style: AppTheme.historyStyle.copyWith(color: Colors.white)),
+                        content: Text(
+                          'Copied!',
+                          style: AppTheme.historyStyle.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
                         backgroundColor: AppTheme.bgElevated,
                         behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         duration: const Duration(seconds: 1),
                       ),
                     );
@@ -380,7 +402,11 @@ class CalcDisplay extends StatelessWidget {
     );
   }
 
-  Widget _actionButton({required IconData icon, required String label, required VoidCallback onTap}) {
+  Widget _actionButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -395,10 +421,13 @@ class CalcDisplay extends StatelessWidget {
           children: [
             Icon(icon, size: 18, color: AppTheme.accentStart),
             const SizedBox(width: 8),
-            Text(label, style: AppTheme.buttonTextSmall.copyWith(
-              color: AppTheme.accentStart,
-              fontSize: 14,
-            )),
+            Text(
+              label,
+              style: AppTheme.buttonTextSmall.copyWith(
+                color: AppTheme.accentStart,
+                fontSize: 14,
+              ),
+            ),
           ],
         ),
       ),

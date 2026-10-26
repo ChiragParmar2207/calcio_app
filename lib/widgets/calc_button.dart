@@ -73,50 +73,52 @@ class _CalcButtonState extends State<CalcButton>
       button: true,
       label: _semanticLabel,
       child: GestureDetector(
-      onTapDown: _handleTapDown,
-      onTapUp: _handleTapUp,
-      onTapCancel: _handleTapCancel,
-      onTap: widget.onTap,
-      onLongPress: widget.onLongPress,
-      child: ScaleTransition(
-        scale: _scaleAnim,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          margin: const EdgeInsets.all(4),
-          decoration: _buildDecoration(),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Shimmer highlight when pressed
-              if (_isPressed)
-                Positioned(
-                  top: -20,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: RadialGradient(
-                          colors: [
-                            Colors.white.withValues(alpha: 0.08),
-                            Colors.transparent,
-                          ],
+        onTapDown: _handleTapDown,
+        onTapUp: _handleTapUp,
+        onTapCancel: _handleTapCancel,
+        onTap: widget.onTap,
+        onLongPress: widget.onLongPress,
+        child: ScaleTransition(
+          scale: _scaleAnim,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 150),
+            margin: const EdgeInsets.all(4),
+            decoration: _buildDecoration(),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Shimmer highlight when pressed
+                if (_isPressed)
+                  Positioned(
+                    top: -20,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        AppTheme.radiusMedium,
+                      ),
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: RadialGradient(
+                            colors: [
+                              Colors.white.withValues(alpha: 0.08),
+                              Colors.transparent,
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
+                // Content
+                Center(
+                  child: widget.icon != null
+                      ? Icon(widget.icon, color: _iconColor, size: 22)
+                      : Text(widget.label, style: _textStyle),
                 ),
-              // Content
-              Center(
-                child: widget.icon != null
-                    ? Icon(widget.icon, color: _iconColor, size: 22)
-                    : Text(widget.label, style: _textStyle),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
         ),
       ),
     );
@@ -129,7 +131,12 @@ class _CalcButtonState extends State<CalcButton>
     final label = widget.label;
     switch (widget.type) {
       case CalcButtonType.operator:
-        const names = {'+': 'plus', '−': 'minus', '×': 'multiply', '÷': 'divide'};
+        const names = {
+          '+': 'plus',
+          '−': 'minus',
+          '×': 'multiply',
+          '÷': 'divide',
+        };
         return names[label] ?? 'Operator $label';
       case CalcButtonType.function:
         return 'Function $label';
